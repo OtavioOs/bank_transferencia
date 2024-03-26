@@ -24,11 +24,11 @@ class BankController {
       required int idReceiver,
       required double amount}) {
     if (!verifyid(idSender)) {
-      throw VerifyIdSenderException();
+      throw VerifyIdSenderException(idSender: idSender);
     }
 
     if (!verifyid(idReceiver)) {
-      throw VerifyIdReceiverException();
+      throw VerifyIdReceiverException(idReceiver: idReceiver);
     }
 
     Account accountSender = _database[idSender]!;
@@ -36,11 +36,11 @@ class BankController {
     Account accountReceiver = _database[idReceiver]!;
 
     if (!accountSender.idAuthentic) {
-      throw VerifyIdAuthenticException();
+      throw VerifyIdAuthenticException(idAuthentic: accountSender.idAuthentic);
     }
 
     if (accountSender.balance < amount) {
-      throw VerifyAmountLowerException();
+      throw VerifyAmountLowerException(balance: accountSender.balance);
     }
 
     accountSender.balance -= amount;

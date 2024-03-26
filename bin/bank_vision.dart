@@ -1,8 +1,9 @@
 import 'controllers/bank_controller.dart';
+import 'controllers/bank_controller_exception/exception.dart';
 import 'models/account.dart';
 
 void main() {
-  try {
+  
     BankController bankController = BankController(); // Pilha 1
     int cconta = bankController.gettingContaCorrente();
 
@@ -23,15 +24,25 @@ void main() {
             balance: 1000,
             idAuthentic: true,
             ccorrente: cconta));
+  try {
 
-    bool result = bankController.makeTransfer(
+        bool result = bankController.makeTransfer(
         // pilha 4
         idSender: 123456,
-        idReceiver: 98765,
-        amount: 300);
+        idReceiver: 987654,
+        amount: 1300);
     print(result);
-  } on Exception catch (e) {
-    print(e.toString());
-    
+
+  } on VerifyIdSenderException catch (e) {
+    print("Erro de ID Sender. ID '${e.idSender}' é inválido");
+  } on VerifyIdReceiverException catch (e) {
+    print("Erro de ID Receiver. ID '${e.idReceiver}' é inválido");
+  } on VerifyIdAuthenticException catch (e) {
+    print("Erro de Autenticação. ${e.idAuthentic}");
+  } on VerifyAmountLowerException catch (e) {
+    print("Erro de valor. É maior que possui. ${e.balance}");
   }
+
+
+
 }
