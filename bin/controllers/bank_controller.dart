@@ -1,5 +1,4 @@
 import 'dart:math';
-
 import '../models/account.dart';
 
 class BankController {
@@ -9,18 +8,9 @@ class BankController {
     _database[id] = account;
   }
 
-  get viewData {
-    return _database;
-  }
-
-  returnMycc(String nome) {
-    _database.containsValue(nome);
-  }
-
   gettingContaCorrente() {
     var random = Random();
     int cconta = random.nextInt(99999);
-
     return cconta;
   }
 
