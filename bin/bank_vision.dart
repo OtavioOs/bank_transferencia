@@ -27,10 +27,11 @@ void main() {
     bool result = bankController.makeTransfer(
         // pilha 4
         idSender: 123456,
-        idReceiver: 987654,
+        idReceiver: 98765,
         amount: 300);
     print(result);
-  } on OutOfMemoryError {
-    print('Error! Insufficient Memory');
+  } on Exception catch (e) {
+    print(e.toString());
+    
   }
 }

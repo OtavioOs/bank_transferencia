@@ -1,5 +1,6 @@
 import 'dart:math';
 import '../models/account.dart';
+import '../controllers/bank_controller_exception/exception.dart';
 
 class BankController {
   static final Map<int, Account> _database = {};
@@ -23,11 +24,11 @@ class BankController {
       required int idReceiver,
       required double amount}) {
     if (!verifyid(idSender)) {
-      return false;
+      throw VerifyIdSenderException();
     }
 
     if (!verifyid(idReceiver)) {
-      return false;
+      throw VerifyIdReceiverException();
     }
 
     Account accountSender = _database[idSender]!;
@@ -35,11 +36,11 @@ class BankController {
     Account accountReceiver = _database[idReceiver]!;
 
     if (!accountSender.idAuthentic) {
-      return false;
+      throw VerifyIdAuthenticException();
     }
 
     if (accountSender.balance < amount) {
-      return false;
+      throw VerifyAmountLowerException();
     }
 
     accountSender.balance -= amount;
