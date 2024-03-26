@@ -40,7 +40,10 @@ class BankController {
     }
 
     if (accountSender.balance < amount) {
-      throw VerifyAmountLowerException(balance: accountSender.balance);
+      throw VerifyAmountLowerException(
+        idSender: idSender,
+        balance: accountSender.balance,
+        amount: amount);
     }
 
     accountSender.balance -= amount;

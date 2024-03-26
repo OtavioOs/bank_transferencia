@@ -34,13 +34,20 @@ void main() {
     print(result);
 
   } on VerifyIdSenderException catch (e) {
+    print(e);
     print("Erro de ID Sender. ID '${e.idSender}' é inválido");
   } on VerifyIdReceiverException catch (e) {
+    print(e);
     print("Erro de ID Receiver. ID '${e.idReceiver}' é inválido");
   } on VerifyIdAuthenticException catch (e) {
+    print(e);
     print("Erro de Autenticação. ${e.idAuthentic}");
   } on VerifyAmountLowerException catch (e) {
-    print("Erro de valor. É maior que possui. ${e.balance}");
+    print(e);
+    print(
+      "Erro de valor.\n Transferir: ${e.amount}\n Valor em conta ${e.balance}\n");
+  } on Exception {
+    print('Algo deu errado.');
   }
 
 
